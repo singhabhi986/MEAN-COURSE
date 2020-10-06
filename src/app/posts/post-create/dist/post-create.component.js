@@ -75,9 +75,15 @@ var PostCreateComponent = /** @class */ (function () {
       this.newPost = postInput.value;
     } */
     PostCreateComponent.prototype.OnImagePicked = function (event) {
+        var _this = this;
         var file = event.target.files[0];
         this.form.patchValue({ Image: file });
         this.form.get('image').updateValueAndValidity();
+        var reader = new FileReader();
+        reader.onload = function () {
+            _this.imagePreview = reader.result;
+        };
+        reader.readAsDataURL(file);
         console.log(file);
         console.log(this.form);
     };
