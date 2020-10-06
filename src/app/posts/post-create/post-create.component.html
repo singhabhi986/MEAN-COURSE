@@ -1,0 +1,107 @@
+<!--<h2> The post create component </h2>-->
+<!-- OUTPUTING CONTENT -->
+<!-- ways to give value to the text area -->
+<!-- PROPERTY BINDING -->
+<!-- <textarea rows="6" >{{ newPost }}</textarea> -->
+<!-- <textarea rows="6" [value] = "'Test'"></textarea> -->
+
+<!-- USING REACTIVE DRIVEN FORM IE NOT USING NG MODEL-->
+
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup] = "form" (submit) = onSavePost()  *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      formControlName="title"
+      placeholder="Post Title">
+      <mat-error *ngIf="form.get('title').invalid">Please enter a post title</mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()"> Pick Image </button>
+      <input type="file" #filePicker (change)="OnImagePicked($event)" >
+    </div>
+    <mat-form-field>
+      <textarea
+      matInput
+      rows="4"
+      formControlName = "content"
+      placeholder="Post Content">
+    </textarea>
+    <mat-error *ngIf="form.get('content').invalid">Please enter some content</mat-error>
+    </mat-form-field>
+    <button
+    mat-raised-button
+    color="primary"
+    type = "submit">
+    Save Post
+    </button>
+  </form>
+</mat-card>
+
+<!-- <textarea rows="6" [value] = "newPost" #postInput></textarea> -->
+<!-- using better approach than above here ngModel is a property of angularformmodule-->
+<!-- USED BELOW DEFINITIONS BEFORE MODEL WERE DEFINED -->
+<!-- [(ngModel)]="enteredTitle"
+[(ngModel)]="enteredContent" -->
+
+
+<!-- TEMPLATE DRIVEN APPROACH -->
+<!-- <mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit) = onSavePost(postForm) #postForm = "ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+      matInput
+      type="text"
+      name = "title"
+      [ngModel] = "post?.title"
+      required
+      placeholder="Post Title"
+      minlength = "3"
+      #title = "ngModel">
+      <mat-error *ngIf="title.invalid">Please enter a post title</mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()"> Pick Image </button>
+      <input type="file" #filePicker>
+    </div>
+    <mat-form-field>
+      <textarea
+      matInput
+      rows="4"
+      name = "content"
+      [ngModel] = "post?.content"
+      required
+      placeholder="Post Content"
+      minlength = "3"
+      #content = "ngModel">
+    </textarea>
+    <mat-error *ngIf="content.invalid">Please enter some content</mat-error>
+    </mat-form-field>
+    <button
+    mat-raised-button
+    color="primary"
+    type = "submit">
+    Save Post
+    </button>
+  </form>
+</mat-card> -->
+<!-- USED BELOW DEFINITION BEFORE -->
+<!-- (click)="onAddPost()" -->
+<!-- <hr> -->
+<!-- Event listener here we integrate something with the button -->
+<!-- <button (click) = "onAddPost(postInput)"> Save Post </button> -->
+<!-- Now get rid of postInput from postInput after using enteredValue -->
+<!-- <button (click) = "onAddPost()"> Save Post </button> -->
+<!-- giving values after submit button that can change from the default value to next value see function in typescript file -->
+<!-- Below line can simply show post that is submitted/added -->
+<!-- <p>{{ newPost }} </p> -->
+
+<!-- GETTING USER INPUT -->
+<!-- used postInput here passed as a argument in click buttons onAddPost -->
+<!-- using ngmodel for better approach towards it i.e TWO WAY BINDING FEATURE i.e using enteredValue-->
+
+<!-- USING ANGULAR MATERIAL -->
+<!-- using matInput function to remember put the whole text area in between material function in html mode -->
